@@ -1,0 +1,1 @@
+### This service is used for collecting students part of microservices
