@@ -1,4 +1,4 @@
-package com.example.studenrabbit;
+package com.dominik.studenrabbit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

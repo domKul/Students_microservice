@@ -1,4 +1,4 @@
-package com.example.studenrabbit.exception;
+package com.dominik.studenrabbit.exception;
 
 public class ErrorInfo {
     private String message;

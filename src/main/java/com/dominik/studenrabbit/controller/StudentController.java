@@ -1,7 +1,7 @@
-package com.example.studenrabbit.controller;
+package com.dominik.studenrabbit.controller;
 
-import com.example.studenrabbit.model.Student;
-import com.example.studenrabbit.service.StudentService;
+import com.dominik.studenrabbit.model.Student;
+import com.dominik.studenrabbit.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.example.studenrabbit.model;
+package com.dominik.studenrabbit.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

@@ -1,6 +1,6 @@
-package com.example.studenrabbit.repository;
+package com.dominik.studenrabbit.repository;
 
-import com.example.studenrabbit.model.Student;
+import com.dominik.studenrabbit.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.studenrabbit;
+package com.dominik.studenrabbit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

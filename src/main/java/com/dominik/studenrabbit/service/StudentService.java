@@ -1,9 +1,9 @@
-package com.example.studenrabbit.service;
+package com.dominik.studenrabbit.service;
 
-import com.example.studenrabbit.exception.StudentError;
-import com.example.studenrabbit.exception.StudentException;
-import com.example.studenrabbit.model.Student;
-import com.example.studenrabbit.repository.StudentRepository;
+import com.dominik.studenrabbit.exception.StudentError;
+import com.dominik.studenrabbit.exception.StudentException;
+import com.dominik.studenrabbit.model.Student;
+import com.dominik.studenrabbit.repository.StudentRepository;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

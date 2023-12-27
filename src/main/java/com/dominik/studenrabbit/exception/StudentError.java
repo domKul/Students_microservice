@@ -1,4 +1,4 @@
-package com.example.studenrabbit.exception;
+package com.dominik.studenrabbit.exception;
 
 public enum StudentError {
     STUDENT_NOT_FOUND("Student does not exists"),
