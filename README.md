@@ -17,6 +17,27 @@ To run the Students Server, follow these steps:
 
 3. Run the program with IDE or use command `./mvnw spring-boot:run`
 
+4. This service are using in memory DB for more effective usage you can connect with SQL server.
+Example for `application.properties`:
+
+```
+spring.datasource.url=jdbc:sqlite:mydb
+spring.datasource.username=admin
+spring.datasource.password=admin
+spring.jpa.database=mysql
+spring.jpa.show-sql=false
+spring.jpa.hibernate.ddl-auto=update
+```
+and `pom.xml` SQL and Hibernate example:
+``` 
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+```
+
+
+
 
 ### Student Controller
 This controller provides endpoints for managing students in the system.
