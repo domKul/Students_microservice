@@ -28,7 +28,6 @@ public class StudentService {
         if (status != null){
             return studentRepository.findAllByStatus(status);
         }
-
         return studentRepository.findAll();
     }
 

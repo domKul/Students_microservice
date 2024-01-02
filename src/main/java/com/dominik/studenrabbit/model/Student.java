@@ -51,6 +51,10 @@ public class Student {
         return status;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
@@ -94,5 +98,16 @@ public class Student {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, status);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                '}';
     }
 }
