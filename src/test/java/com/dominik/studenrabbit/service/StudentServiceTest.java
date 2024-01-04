@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -121,23 +120,43 @@ public class StudentServiceTest {
     }
 
 
-//    @Test
-//    void shouldUpdateStudent(){
-//        //Given
-//        long id = student2.getId();
-//        Student studentUpdate = new Student(id,"firstNameUpdate","lastNameUpdate","emailUpdate@email.com");
-//        when(studentRepository.findById(id)).thenReturn(Optional.ofNullable(student2));
-//        when(studentRepository.existsByEmail(studentUpdate.getEmail())).thenReturn(false);
-//
-//
-//        //When
-//        Student update = service.updateStudent(id, studentUpdate);
-//
-//        //Then
-//        assertEquals(studentUpdate.getId(),update.getId());
-//        assertEquals(studentUpdate.getFirstName(),update.getFirstName());
-//        assertEquals(studentUpdate.getLastName(),update.getLastName());
-//
-//    }
+    @Test
+    void shouldUpdateStudent(){
+        //Given
+        long id = student1.getId();
+        Student studentUpdate = new Student(id,"firstNameUpdate","lastNameUpdate","emailUpdate@email.com");
+        when(studentRepository.save(student1)).thenReturn(student1);
+        when(studentRepository.findById(id)).thenReturn(Optional.ofNullable(student1));
+
+        //When
+        Student update = service.updateStudent(id, studentUpdate);
+
+        //Then
+        assertEquals(studentUpdate.getId(),update.getId());
+        assertEquals(studentUpdate.getFirstName(),update.getFirstName());
+        assertEquals(studentUpdate.getLastName(),update.getLastName());
+
+    }
+
+
+    @Test
+    public void shouldPatchStudent() {
+        //Given
+        long id = 1L;
+        Student studentFromDB = new Student(id, "firstName1", "lastName1", "email1@email.com");
+        when(studentRepository.save(studentFromDB)).thenReturn(studentFromDB);
+        Student studentPatch = new Student();
+        studentPatch.setFirstName("firstNameUpdate");
+        when(studentRepository.findById(id)).thenReturn(Optional.of(studentFromDB));
+
+        //When
+        Student patchedStudent = service.patchStudent(id, studentPatch);
+
+        //Then
+        assertNotNull(patchedStudent);
+        assertEquals("firstNameUpdate", patchedStudent.getFirstName());
+        assertEquals("lastName1", patchedStudent.getLastName());
+        assertEquals("email1@email.com", patchedStudent.getEmail());
+    }
 
 }
