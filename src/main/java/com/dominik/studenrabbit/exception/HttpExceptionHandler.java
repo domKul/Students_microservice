@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class HttpExceptionHandler {
+
     @ExceptionHandler
     public ResponseEntity<ErrorInfo> handleNotFoundException(StudentException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorInfo(e.getStudentError().getMessage()));

@@ -20,11 +20,11 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class StudentServiceTest {
+
     @InjectMocks
     private StudentService service;
     @Mock
     private StudentRepository studentRepository;
-
     private Student student0;
     private Student student1;
     private Student student2;
@@ -64,10 +64,10 @@ public class StudentServiceTest {
         when(service.students(Student.Status.ACTIVE)).thenReturn(expectedList);
         //When
         List<Student> findActiveStudents = service.students(Student.Status.ACTIVE);
-
         //Then
         assertEquals(expectedList.size(),findActiveStudents.size());
     }
+
     @Test
     void shouldFindAllStudentsWithNoStatus(){
         //Given
@@ -91,7 +91,6 @@ public class StudentServiceTest {
         assertEquals(student1.getFirstName(),getById.getFirstName());
         assertEquals(student1.getLastName(),getById.getLastName());
         assertEquals(student1.getEmail(),getById.getEmail());
-
     }
 
     @Test
@@ -103,22 +102,17 @@ public class StudentServiceTest {
                 () -> service.getStudentById(wrongId));
 
         assertEquals(StudentError.STUDENT_NOT_FOUND.getMessage(),studentException.getStudentError().getMessage());
-
     }
 
     @Test
     void shouldThrowExceptionIfStudentStatusIsNotActive() {
         //Given
         when(studentRepository.findById(12L)).thenReturn(Optional.ofNullable(student0));
-
         //When
         StudentException studentException = assertThrows(StudentException.class, () -> service.getStudentById(12L));
-
         //Then
         assertEquals(StudentError.STUDENT_IS_NOT_ACTIVE.getMessage(),studentException.getStudentError().getMessage());
-
     }
-
 
     @Test
     void shouldUpdateStudent(){
@@ -127,17 +121,13 @@ public class StudentServiceTest {
         Student studentUpdate = new Student(id,"firstNameUpdate","lastNameUpdate","emailUpdate@email.com");
         when(studentRepository.save(student1)).thenReturn(student1);
         when(studentRepository.findById(id)).thenReturn(Optional.ofNullable(student1));
-
         //When
         Student update = service.updateStudent(id, studentUpdate);
-
         //Then
         assertEquals(studentUpdate.getId(),update.getId());
         assertEquals(studentUpdate.getFirstName(),update.getFirstName());
         assertEquals(studentUpdate.getLastName(),update.getLastName());
-
     }
-
 
     @Test
     public void shouldPatchStudent() {
@@ -148,15 +138,12 @@ public class StudentServiceTest {
         Student studentPatch = new Student();
         studentPatch.setFirstName("firstNameUpdate");
         when(studentRepository.findById(id)).thenReturn(Optional.of(studentFromDB));
-
         //When
         Student patchedStudent = service.patchStudent(id, studentPatch);
-
         //Then
         assertNotNull(patchedStudent);
         assertEquals("firstNameUpdate", patchedStudent.getFirstName());
         assertEquals("lastName1", patchedStudent.getLastName());
         assertEquals("email1@email.com", patchedStudent.getEmail());
     }
-
 }

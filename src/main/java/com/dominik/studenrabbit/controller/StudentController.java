@@ -46,6 +46,4 @@ public class StudentController {
     public List<Student> getByEmail(@RequestBody List<String> email) {
         return service.getStudentByEmail(email);
     }
-
-
 }

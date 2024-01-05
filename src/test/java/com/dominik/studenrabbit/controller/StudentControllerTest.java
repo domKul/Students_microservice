@@ -41,10 +41,8 @@ public class StudentControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
-
     @Autowired
     private StudentController studentController;
-
     private Student student;
     private Student student1;
     private Student student2;
@@ -77,13 +75,11 @@ public class StudentControllerTest {
         studentRepository.save(student5);
     }
 
-
     @Test
     void shouldCreateSaveStudent() throws Exception {
         //Given
         student = new Student(20000L,"firstName","lastName","emailnew@email.com");
         when(service.addStudent(student)).thenReturn(student);
-
         //When & Then
         mockMvc.perform(MockMvcRequestBuilders.post("/students")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -95,13 +91,11 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.email").value("emailnew@email.com"));
     }
 
-
     @Test
     void shouldReturnAllStudentsWhenStatusIsNull() throws Exception {
         // Given
         List<Student> all = studentRepository.findAll();
         when(service.students(null)).thenReturn(all);
-
         // When & Then
         mockMvc.perform(MockMvcRequestBuilders.get("/students"))
                 .andExpect(status().isOk())
@@ -115,7 +109,6 @@ public class StudentControllerTest {
     void shouldReturnAllStudentsWhenStatusIsACTIVE() throws Exception {
         // Given
         when(service.students(Student.Status.ACTIVE)).thenReturn(List.of(student3,student4,student5));
-
         // When & Then
         mockMvc.perform(MockMvcRequestBuilders.get("/students")
                         .param("status","ACTIVE"))
@@ -128,8 +121,7 @@ public class StudentControllerTest {
         // Given
         Long id = student4.getId();
         when(service.getStudentById(id)).thenReturn(student4);
-
-        // When
+        // When & Then
         mockMvc.perform(MockMvcRequestBuilders.get("/students/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
@@ -142,11 +134,9 @@ public class StudentControllerTest {
     void shouldModifyStudentById() throws Exception {
         // Given
         long id = student.getId();
-
         Student modifiedStudent = new Student(id, "firstNameModified", "lastNameModiefied", "emailModified@email.com");
         modifiedStudent.setStatus(Student.Status.ACTIVE);
         doReturn(modifiedStudent).when(service).updateStudent(id, modifiedStudent);
-
         // When & Then
         mockMvc.perform(MockMvcRequestBuilders.put("/students/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -155,7 +145,6 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.firstName").value("firstNameModified"))
                 .andExpect(jsonPath("$.lastName").value("lastNameModiefied"))
                 .andExpect(jsonPath("$.email").value("emailModified@email.com"));
-
         // Verify
         verify(service, times(1)).updateStudent(id,modifiedStudent);
     }
@@ -172,7 +161,6 @@ public class StudentControllerTest {
         modifiedStudent.setLastName(student6.getLastName());
         modifiedStudent.setEmail(student6.getEmail());
         doReturn(modifiedStudent).when(service).patchStudent(id, modifiedStudent);
-
         // When & Then
         mockMvc.perform(MockMvcRequestBuilders.patch("/students/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -181,7 +169,6 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.firstName").value("firstNameModified"))
                 .andExpect(jsonPath("$.lastName").value("lastName6"))
                 .andExpect(jsonPath("$.email").value("emai6l@email.com"));
-
         // Verify
         verify(service, times(1)).patchStudent(id, modifiedStudent);
     }
@@ -194,28 +181,13 @@ public class StudentControllerTest {
         students.add(student1);
         students.add(student2);
         when(service.getStudentByEmail(emails)).thenReturn(students);
-
         // When
         mockMvc.perform(MockMvcRequestBuilders.post("/students/email")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(emails)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2));
-
         // Verify
         verify(service, times(1)).getStudentByEmail(emails);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

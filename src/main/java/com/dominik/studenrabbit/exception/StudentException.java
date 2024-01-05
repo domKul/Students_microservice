@@ -1,6 +1,7 @@
 package com.dominik.studenrabbit.exception;
 
 public class StudentException extends RuntimeException{
+
     private StudentError studentError;
 
     public StudentException(StudentError studentError) {

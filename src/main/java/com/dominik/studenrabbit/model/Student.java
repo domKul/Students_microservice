@@ -18,22 +18,18 @@ public class Student {
     private Long id;
     @NotBlank
     private String firstName;
-
     @NotEmpty
     @Size(min = 3)
     private String lastName;
-
     @NotBlank
     @Email
     @Column(unique = true)
     private String email;
-
     @Enumerated(EnumType.STRING)
     @NotNull
     private Status status;
 
     public Student() {
-
     }
 
     public enum Status {

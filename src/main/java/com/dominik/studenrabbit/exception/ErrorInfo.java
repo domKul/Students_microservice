@@ -1,6 +1,7 @@
 package com.dominik.studenrabbit.exception;
 
 public class ErrorInfo {
+
     private String message;
 
     public ErrorInfo(String message) {
